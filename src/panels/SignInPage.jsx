@@ -17,8 +17,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="https://vk.com/votelroge">
+        Summer practice, TPU
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundImage: 'url(https://www.practicalmoneyskills.com/assets/images/non-card/creating_a_budget.jpg)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -70,7 +70,7 @@ export default function SignInPage() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Войти
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
@@ -79,7 +79,7 @@ export default function SignInPage() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Email"
               name="email"
               autoComplete="email"
               autoFocus
@@ -90,14 +90,14 @@ export default function SignInPage() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="Пароль"
               type="password"
               id="password"
               autoComplete="current-password"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              label="Запомнить"
             />
             <Button
               type="submit"
@@ -106,17 +106,17 @@ export default function SignInPage() {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              Войти
             </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  Забыли пароль?
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  {"Создать аккаунт"}
                 </Link>
               </Grid>
             </Grid>
