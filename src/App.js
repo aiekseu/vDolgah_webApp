@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+//@ts-check
+import React, { useState } from 'react';
+import { Button, Box } from '@material-ui/core';
+import RegisterPage from './panels/RegisterPage';
+import SignInPage from './panels/SignInPage';
 
-function App() {
+const App = () => {
+  const [activePanel, setActivePanel] = useState('loginPage');   
+
+  const go = e => {
+		setActivePanel(e.currentTarget.dataset.to);
+	};
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box>
+      <SignInPage/>
+      <RegisterPage id='registerPage' go={go}/>
+    </Box> 
   );
 }
 
-export default App;
+export default App
