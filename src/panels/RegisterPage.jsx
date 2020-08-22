@@ -1,16 +1,10 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 
-const RegisterPage = ({id, go}) => {
+const RegisterPage = (props) => {
     return (
         <div>
             <p>Вы зарегались</p>
-            <Button 
-                data-to='loginPage'
-                onClick={(e) => {
-                    go(e)
-                }}
-            > :) </Button>
         </div>
     )
 }

@@ -1,22 +1,22 @@
 //@ts-check
 import React, { useState } from 'react';
-import { Button, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
+import { Switch, Route } from 'react-router-dom';
+
 import RegisterPage from './panels/RegisterPage';
-import SignInPage from './panels/SignInPage';
+import LoginPage from './panels/LoginPage';
+import MainPage from './panels/MainPage';
 
 const App = () => {
-  const [activePanel, setActivePanel] = useState('loginPage');   
 
-  const go = e => {
-		setActivePanel(e.currentTarget.dataset.to);
-	};
-
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
 
   return (
-    <Box>
-      <SignInPage/>
-      <RegisterPage id='registerPage' go={go}/>
-    </Box> 
+    <Switch>
+      <Route exact path="/" render={() => <MainPage userLoggedIn={userLoggedIn} />} />
+      <Route path="/login" render={() => <LoginPage setUserLoggedIn={setUserLoggedIn} />} />
+      <Route path="/register" render={() => <RegisterPage />} />
+    </Switch>
   );
 }
 
