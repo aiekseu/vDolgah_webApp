@@ -1,12 +1,13 @@
 import React, { useState, useRef } from 'react';
 import { useHistory } from "react-router-dom";
+import { SnackbarProvider, useSnackbar } from 'notistack';
+import { getData, storeData } from '../data/localStorage';
+import { makeStyles } from '@material-ui/core/styles';
 import {
     Avatar,
     Button,
     CssBaseline,
     TextField,
-    FormControlLabel,
-    Checkbox,
     Link,
     Paper,
     Box,
@@ -14,8 +15,6 @@ import {
     Typography
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { makeStyles } from '@material-ui/core/styles';
-import users from '../data/users';
 
 function AlreadyRegistered() {
     return (
@@ -65,19 +64,20 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const RegisterPage = ({setUserLoggedIn}) => {
+const RegisterPage = () => {
     const classes = useStyles();
     const history = useHistory();
-    const store = require('store')
+    const currentUsers = getData("users")
+    const { enqueueSnackbar } = useSnackbar();
 
     let name_tf = useRef(null);
     let email_tf = useRef(null);
     let password_tf = useRef(null);
     let second_password_tf = useRef(null);
 
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
     const nameRegex = /^[а-яА-Яa-zA-Z]+$/
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
 
     const [nameText, setNameText] = useState("");
     const [emailText, setEmailText] = useState("");
@@ -85,39 +85,36 @@ const RegisterPage = ({setUserLoggedIn}) => {
     const [secondPasswordText, setSecondPasswordText] = useState("");
     const nameError = !nameRegex.test(nameText)
     const emailError = !emailRegex.test(emailText)
-    const passwordError = !passwordRegex.test(nameText)
-    const secondPasswordError = !(passwordText === secondPasswordText)
-    
+    const passwordError = !passwordRegex.test(passwordText)
+    const secondPasswordError = !(secondPasswordText === passwordText)
+
 
     function tryRegister() {
+        if (nameError || emailError || passwordError || secondPasswordError) return
 
-        
+        let found = false;
+        for (let i = 0; i < currentUsers.length; i++) {
+            if (currentUsers[i].EMAIL === emailText ) {
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            enqueueSnackbar('Пользователь с таким email уже существует', {variant: 'error'});
+            return
+        }
 
-        console.log(name_tf.current)
+        let newUsers = new Array(currentUsers)
+        newUsers.push({ EMAIL: emailText, PASSWORD: passwordText, NAME: nameText })
+        storeData("users", newUsers)
+        console.log(getData("users"))
 
-        name_tf.current.error = !nameRegex.test(nameText)   
-
-        /* users.forEach(element => {
-            console.log(element)
-            if (element.EMAIL === email_tf.current.value & element.PASSWORD === password_tf.current.value)
-                userExist = true
-        });
-
-        if (userExist) {
-            if (rememberMe.current.checked)
-                store.set("email", email_tf.current.value)
-            else store.remove('email')
-            setUserLoggedIn(true)
-            history.push("/")
-            }      */       
     }
-
-
 
     return (
         <Grid container component="main" className={classes.root}>
             <CssBaseline />
-            
+            <Grid item xs={false} sm={4} md={7} className={classes.image} />
             <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
@@ -137,7 +134,7 @@ const RegisterPage = ({setUserLoggedIn}) => {
                             label="Имя"
                             type="email"
                             inputRef={name_tf}
-                            value={nameText}                            
+                            value={nameText}
                             onChange={e => { setNameText(e.currentTarget.value) }}
                             helperText={nameError ? "Введите корректное имя" : ""}
                             autoFocus
@@ -154,7 +151,7 @@ const RegisterPage = ({setUserLoggedIn}) => {
                             value={emailText}
                             onChange={e => { setEmailText(e.currentTarget.value) }}
                             helperText={emailError ? "Введите корректный email" : ""}
-                            inputRef={email_tf}                            
+                            inputRef={email_tf}
                         />
                         <TextField
                             error={passwordError}
@@ -165,11 +162,11 @@ const RegisterPage = ({setUserLoggedIn}) => {
                             label="Пароль"
                             type="password"
                             id="password"
-                            inputRef={password_tf}                            
+                            inputRef={password_tf}
                             value={passwordText}
                             onChange={e => { setPasswordText(e.currentTarget.value) }}
-                            helperText={passwordError ? "Пароль должен быть длиннее 8 символов, содержать цифру, заглавную и строчную букву" : ""}                            
-                        />     
+                            helperText={passwordError ? "Пароль должен быть длиннее 8 символов, содержать цифру и букву" : ""}
+                        />
                         <TextField
                             error={secondPasswordError}
                             variant="outlined"
@@ -179,7 +176,7 @@ const RegisterPage = ({setUserLoggedIn}) => {
                             label="Повторите пароль"
                             type="password"
                             id="password_second"
-                            inputRef={second_password_tf}                            
+                            inputRef={second_password_tf}
                             value={secondPasswordText}
                             onChange={e => { setSecondPasswordText(e.currentTarget.value) }}
                             helperText={secondPasswordError ? "Пароли не совпадают" : ""}
@@ -200,7 +197,6 @@ const RegisterPage = ({setUserLoggedIn}) => {
                     </form>
                 </div>
             </Grid>
-            <Grid item xs={false} sm={4} md={7} className={classes.image} />
         </Grid>
     );
 }

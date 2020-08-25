@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useHistory } from "react-router-dom";
+import { getData, storeData } from '../data/localStorage';
 import {
     Avatar,
     Button,
@@ -17,18 +18,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import users from '../data/users';
 
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://vk.com/votelroge">
-                Summer practice, TPU
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -65,15 +55,13 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-
-
 const LoginPage = ({setUserLoggedIn}) => {
     const classes = useStyles();
     const history = useHistory();
+    const store = require('store')
     let rememberMe = useRef(null);
     let email_tf = useRef(null);
     let password_tf = useRef(null);
-    const store = require('store')
 
 
     function tryLogin() {
@@ -94,6 +82,19 @@ const LoginPage = ({setUserLoggedIn}) => {
             }            
     }
 
+
+    function Copyright() {
+        return (
+            <Typography variant="body2" color="textSecondary" align="center">
+                {'Copyright © '}
+                <Link color="inherit" href="https://vk.com/votelroge">
+                    Summer practice, TPU
+                </Link>{' '}
+                {new Date().getFullYear()}
+                {'.'}
+            </Typography>
+        );
+    }
 
 
     return (
