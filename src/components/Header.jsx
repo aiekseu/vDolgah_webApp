@@ -1,7 +1,7 @@
 import React from "react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
-import AcUnitRoundedIcon from "@material-ui/icons/AcUnitRounded";
 import { makeStyles } from "@material-ui/styles";
+import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles(() => ({
     typographyStyles: {
@@ -16,9 +16,9 @@ const Header = () => {
         <AppBar position="static">
             <Toolbar>
                 <Typography className={classes.typographyStyles}>
-                    Мои долги
+                    В долгах
                 </Typography>
-                <AcUnitRoundedIcon />
+                <MenuIcon />
             </Toolbar>
         </AppBar>
     );

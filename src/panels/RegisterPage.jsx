@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useHistory } from "react-router-dom";
-import { SnackbarProvider, useSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 import { getData, storeData } from '../data/localStorage';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -109,6 +109,7 @@ const RegisterPage = () => {
         storeData("users", newUsers)
         console.log(getData("users"))
 
+        history.push("/login")
     }
 
     return (

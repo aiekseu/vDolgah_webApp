@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useHistory } from "react-router-dom";
-import { getData, storeData } from '../data/localStorage';
+import { getData } from '../data/localStorage';
 import {
     Avatar,
     Button,
@@ -59,24 +59,26 @@ const LoginPage = ({setUserLoggedIn}) => {
     const classes = useStyles();
     const history = useHistory();
     const store = require('store')
+    const currentUsers = getData('users')
+
     let rememberMe = useRef(null);
     let email_tf = useRef(null);
     let password_tf = useRef(null);
 
 
     function tryLogin() {
-        var userExist = false;
+        let userExist = false;
+        console.log(currentUsers)
 
-        users.forEach(element => {
-            console.log(element)
+        currentUsers.forEach(element => {
             if (element.EMAIL === email_tf.current.value & element.PASSWORD === password_tf.current.value)
                 userExist = true
         });
 
         if (userExist) {
             if (rememberMe.current.checked)
-                store.set("email", email_tf.current.value)
-            else store.remove('email')
+                store.set("rememberedEmail", email_tf.current.value)
+            else store.remove('rememberedEmail')
             setUserLoggedIn(true)
             history.push("/")
             }            
@@ -119,7 +121,7 @@ const LoginPage = ({setUserLoggedIn}) => {
                             label="Email"
                             type="email"
                             inputRef={email_tf}
-                            defaultValue={store.get('email')}
+                            defaultValue={store.get('rememberedEmail')}
                             autoFocus
                         />
                         <TextField
