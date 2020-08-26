@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, Grid, CardActions, CardContent, Button, Typography, IconButton } from '@material-ui/core';
+
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import MailIcon from '@material-ui/icons/Mail';
@@ -8,11 +9,6 @@ import MailIcon from '@material-ui/icons/Mail';
 const useStyles = makeStyles({
     root: {
         display: 'flex',
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
     },
     title: {
         fontSize: 12,
@@ -36,7 +32,7 @@ const useStyles = makeStyles({
     button: {
         fontSize: '16px', 
         paddingBottom: '10px', 
-        paddingTop: '10px',
+        paddingTop: '0px',
         paddingLeft: '0px',
         paddingRight: '0px'
     }
