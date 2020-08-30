@@ -17,3 +17,10 @@ export const storeData = (key, item) => {
 		console.error(`Error storing item ${key} to localStorage`, err);
 	}
 };
+
+export const clearData = (key) => {
+	if (!localStorage) return;
+	
+    const store = require('store')
+	store.set(key, [])
+};

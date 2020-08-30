@@ -1,21 +1,35 @@
 import React from 'react';
-import { Button, Grid, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, TextField } from '@material-ui/core';
+import { 
+    Button, 
+    Grid
+    } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
+import { getData } from '../data/localStorage';
 
 import AddIcon from '@material-ui/icons/Add';
 
+import DialogToAdd from '../components/DialogToAdd'
 import Header from '../components/Header';
 import Debt from '../components/Debt'
 
 
+
 const useStyles = makeStyles({
-    root: {
+    content: {
+
     },
     button: {
         textAlign: 'center',
-        verticalAlign: 'bottom'
+        position: 'sticky',
+        top: 'auto',
+        bottom: 0,
     },
+    header: {
+        position: 'sticky',
+        top: '0'
+
+    }
 });
 
 
@@ -23,6 +37,11 @@ const MainPage = ({ userLoggedIn }) => {
     const history = useHistory();
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
+    const [update, setUpdate] = React.useState(false);
+
+    var listOfNotes = getData('notes')
+    if (listOfNotes == null) 
+        listOfNotes = []
 
 
     // УБРАТЬ!!
@@ -36,19 +55,29 @@ const MainPage = ({ userLoggedIn }) => {
         setOpen(false);
     };
 
+    const tryAdd = () => {
+
+    }
+
+    const updateParent = () => {
+        setUpdate(!update)
+    }
+
     return (
         <div>
             <Grid container direction="column">
-                <Grid item >
+                <Grid item className={classes.header}>
                     <Header />
                 </Grid>
 
-                <Grid item container>
+                <Grid item container >
                     <Grid item xs={false} sm={1} />
-                    <Grid item container xs={12} sm={10}>
-                        <Debt name="Виктор" email="victorezs@mail.ru" sum="1000" date="06.11.2020" />
-                        <Debt name="Виктор" email="victorezs@mail.ru" sum="10000" date="02.11.2020" />
-                        <Debt name="Виктор" email="victorezs@mail.ru" sum="5000" date="06.12.2020" />
+                    <Grid item container xs={12} sm={10} className={classes.content}>
+                        {
+                            listOfNotes.map((note, i) => (
+                                <Debt key={i} id={note.ID} name={note.NAME} sum={note.SUM} email={note.EMAIL} date={note.DATE} updateParent={updateParent}/>
+                            ))
+                        }
                     </Grid>
                     <Grid item xs={false} sm={1} />
                 </Grid>
@@ -66,31 +95,7 @@ const MainPage = ({ userLoggedIn }) => {
                 </Grid>
             </Grid>
 
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Добавить запись</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        To subscribe to this website, please enter your email address here. We will send updates
-                        occasionally.
-                    </DialogContentText>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Email Address"
-                        type="email"
-                        fullWidth
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="primary">
-                        Cancel
-                    </Button>
-                    <Button onClick={handleClose} color="primary">
-                        Subscribe
-                    </Button>
-                </DialogActions>
-            </Dialog>
+            <DialogToAdd handleClose={handleClose} open={open} />
         </div>
     )
 

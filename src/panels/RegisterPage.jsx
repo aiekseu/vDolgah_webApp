@@ -107,8 +107,6 @@ const RegisterPage = () => {
         let newUsers = new Array(currentUsers)
         newUsers.push({ EMAIL: emailText, PASSWORD: passwordText, NAME: nameText })
         storeData("users", newUsers)
-        console.log(getData("users"))
-
         history.push("/login")
     }
 
