@@ -11,7 +11,7 @@ import { SnackbarProvider } from 'notistack';
 const history = createBrowserHistory();
 
 ReactDOM.render(
-    <SnackbarProvider maxSnack="2">
+    <SnackbarProvider maxSnack="2" >
         <Router history={history}>
             <App />
         </Router>

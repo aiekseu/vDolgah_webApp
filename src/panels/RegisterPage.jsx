@@ -67,8 +67,11 @@ const useStyles = makeStyles((theme) => ({
 const RegisterPage = () => {
     const classes = useStyles();
     const history = useHistory();
-    const currentUsers = getData("users")
     const { enqueueSnackbar } = useSnackbar();
+
+    var currentUsers = getData("users")
+    if (!currentUsers) 
+        currentUsers = []
 
     let name_tf = useRef(null);
     let email_tf = useRef(null);

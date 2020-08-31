@@ -5,11 +5,15 @@ import {
     Typography,
     IconButton,
     useScrollTrigger,
-    Slide,    
-    CssBaseline
+    Slide,
+    CssBaseline,
+    Menu,
+    MenuItem
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { storeData } from '../data/localStorage';
 import MenuIcon from '@material-ui/icons/Menu';
+
 
 const useStyles = makeStyles((theme) => ({
 
@@ -34,6 +38,21 @@ function HideOnScroll(props) {
 
 const Header = (props) => {
     const classes = useStyles();
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const setUserLoggedIn = props.setUserLoggedIn
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const tryLogout = () => {
+        storeData('loggedUser', null)
+        setUserLoggedIn(false)
+    }
 
     return (
         <React.Fragment>
@@ -41,16 +60,27 @@ const Header = (props) => {
             <HideOnScroll {...props}>
                 <AppBar>
                     <Toolbar>
-                    <Typography className={classes.typographyStyles} variant='h4'>
-                        В долгах
+                        <Typography className={classes.typographyStyles} variant='h4'>
+                            В долгах
                     </Typography>
-                    <IconButton>
-                        <MenuIcon style={{ color: 'white' }} />
-                    </IconButton>
+                        <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                            <MenuIcon style={{ color: 'white' }}/>
+                        </IconButton>
                     </Toolbar>
                 </AppBar>
             </HideOnScroll>
             <Toolbar />
+
+            <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+            >
+                <MenuItem onClick={handleClose}>Профиль</MenuItem>
+                <MenuItem onClick={tryLogout}>Выйти</MenuItem>
+            </Menu>
         </React.Fragment>
     );
 };

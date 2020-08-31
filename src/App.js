@@ -12,7 +12,7 @@ const App = () => {
 
   return (
       <Switch>
-        <Route exact path="/" render={() => <MainPage userLoggedIn={userLoggedIn} />} />
+        <Route exact path="/" render={() => <MainPage userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} />} />
         <Route path="/login" render={() => <LoginPage setUserLoggedIn={setUserLoggedIn} />} />
         <Route path="/register" render={() => <RegisterPage />} />
       </Switch>

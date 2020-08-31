@@ -58,7 +58,10 @@ const LoginPage = ({setUserLoggedIn}) => {
     const classes = useStyles();
     const history = useHistory();
     const store = require('store')
-    const currentUsers = getData('users')
+
+    var currentUsers = getData('users')
+    if (!currentUsers)
+        currentUsers = []
 
     let rememberMe = useRef(null);
     let email_tf = useRef(null);
@@ -67,10 +70,11 @@ const LoginPage = ({setUserLoggedIn}) => {
 
     function tryLogin() {
         let userExist = false;
-        console.log(currentUsers)
+        let email = email_tf.current.value
+        let password = password_tf.current.value
 
         currentUsers.forEach(element => {
-            if (element.EMAIL === email_tf.current.value & element.PASSWORD === password_tf.current.value)
+            if (element.EMAIL === email & element.PASSWORD === password)
                 userExist = true
         });
 
@@ -78,6 +82,7 @@ const LoginPage = ({setUserLoggedIn}) => {
             if (rememberMe.current.checked)
                 store.set("rememberedEmail", email_tf.current.value)
             else store.remove('rememberedEmail')
+            store.set('loggedUser', email)
             setUserLoggedIn(true)
             history.push("/")
             }            

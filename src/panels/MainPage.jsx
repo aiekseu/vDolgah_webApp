@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 });
 
 
-const MainPage = ({ userLoggedIn }) => {
+const MainPage = ({ userLoggedIn, setUserLoggedIn }) => {
     const history = useHistory();
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
@@ -67,7 +67,7 @@ const MainPage = ({ userLoggedIn }) => {
         <div>
             <Grid container direction="column">
                 <Grid item className={classes.header}>
-                    <Header />
+                    <Header setUserLoggedIn={setUserLoggedIn}/>
                 </Grid>
 
                 <Grid item container >

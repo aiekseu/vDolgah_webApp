@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, Grid, CardActions, CardContent, TextField, Typography, IconButton } from '@material-ui/core';
+import { Card, Grid, CardActions, CardContent, TextField, Typography, IconButton, Button } from '@material-ui/core';
 import { getData, storeData } from '../data/localStorage';
-import { useSnackbar } from 'notistack';
+import { useSnackbar, SnackbarProvider } from 'notistack';
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
@@ -27,6 +27,10 @@ const useStyles = makeStyles({
     },
     date: {
         textAlign: 'right'
+    },
+    email: {
+        marginBottom: 0,
+        paddingBottom: 0
     },
     buttons: {
         display: 'flex',
@@ -74,6 +78,7 @@ export default function Debt({ id, name, sum, email, date, updateParent }) {
 
         storeData('notes', currentNotes)
         updateParent()
+        enqueueSnackbar('Запись удалена', {variant: 'warning'})
     }
 
 
@@ -138,7 +143,7 @@ export default function Debt({ id, name, sum, email, date, updateParent }) {
                                 }
                                 {
                                     !isEditable
-                                        ? <Typography variant="body2" color="textSecondary" component="h2">
+                                        ? <Typography variant="body2" color="textSecondary" component="h2" className={classes.email}>
                                             {email}
                                         </Typography>
                                         : <TextField
