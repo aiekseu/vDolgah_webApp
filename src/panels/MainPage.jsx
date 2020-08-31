@@ -67,7 +67,7 @@ const MainPage = ({ userLoggedIn, setUserLoggedIn }) => {
         <div>
             <Grid container direction="column">
                 <Grid item className={classes.header}>
-                    <Header setUserLoggedIn={setUserLoggedIn}/>
+                    <Header setUserLoggedIn={setUserLoggedIn} pageId={'main'}/>
                 </Grid>
 
                 <Grid item container >

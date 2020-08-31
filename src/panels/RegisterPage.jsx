@@ -132,9 +132,9 @@ const RegisterPage = () => {
                             margin="normal"
                             required
                             fullWidth
-                            id="email"
+                            id="name"
                             label="Имя"
-                            type="email"
+                            type="text"
                             inputRef={name_tf}
                             value={nameText}
                             onChange={e => { setNameText(e.currentTarget.value) }}
