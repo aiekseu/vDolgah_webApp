@@ -45,7 +45,7 @@ const MainPage = ({ userLoggedIn, setUserLoggedIn }) => {
 
 
     // УБРАТЬ!!
-    /* !userLoggedIn && history.push("/login") */
+    !userLoggedIn && history.push("/login")
 
     const handleClickOpen = () => {
         setOpen(true);

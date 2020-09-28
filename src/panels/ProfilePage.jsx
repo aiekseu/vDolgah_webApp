@@ -14,9 +14,8 @@ import SaveIcon from '@material-ui/icons/Save';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import EditIcon from '@material-ui/icons/Edit';
 
-import DialogToAdd from '../components/DialogToAdd'
 import Header from '../components/Header';
-
+import Graph from '../components/Graph';
 
 
 const useStyles = makeStyles({
@@ -54,6 +53,10 @@ const ProfilePage = ({ setUserLoggedIn }) => {
 
     const currentUser = getData('loggedUser')
     const allUsers = getData('users')
+    const allNotes = getData('notes')
+
+    let meToGeneralSum = 0
+    let toMeGeneralSum = 0
     let currentUserPos = -1
     let currentUserName = ''
     let currentUserEmail = ''
@@ -67,6 +70,14 @@ const ProfilePage = ({ setUserLoggedIn }) => {
             currentUserPassword = allUsers[i].PASSWORD
         }
     }
+
+    allNotes.forEach(element => {
+        if (element.ID === 'tome') {
+            toMeGeneralSum += parseInt(element.SUM, 10)
+        } else if (element.ID === 'meto') {
+            meToGeneralSum += parseInt(element.SUM, 10)
+        }
+    });
 
     const nameRegex = /^[а-яА-Яa-zA-Z]+$/
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -117,6 +128,8 @@ const ProfilePage = ({ setUserLoggedIn }) => {
         storeData('users', allUsers)
         storeData('loggedUser', newEmail)
     }
+
+    console.log(localStorage)
 
     return (
         <div>
@@ -192,6 +205,7 @@ const ProfilePage = ({ setUserLoggedIn }) => {
                                                 value={userEmail}
                                                 onChange={e => { setUserEmail(e.currentTarget.value) }}
                                                 helperText={emailError ? "Введите корректный email" : ""}
+                                                autoFocus
                                             />
                                     }
                                 </Grid>
@@ -237,12 +251,13 @@ const ProfilePage = ({ setUserLoggedIn }) => {
                             </Grid>
 
                             <Grid item className={classes.infos}>
-                                <Typography style={{marginTop: '16px'}}>{'Всего мне должны: '}<b>1500 руб.</b></Typography>
+                                <Typography style={{ marginTop: '16px' }}>{'Всего мне должны: '}<b>{toMeGeneralSum} руб.</b></Typography>
+                                <Typography>{'Всего я должен: '}<b>{meToGeneralSum} руб.</b></Typography>
                             </Grid>
 
-                            <Grid item className={classes.infos}>
-                                <Typography>{'Всего я должен: '}<b>100 руб.</b></Typography>
-                            </Grid>
+                            
+                                <Graph />
+                            
                         </Grid>
                     </Grid>
                     <Grid item xs={false} sm={1} />

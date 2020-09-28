@@ -1,4 +1,4 @@
-import React, {  useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useSnackbar } from 'notistack';
 import {
     Button,
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 const DialogToAdd = ({ handleClose, open }) => {
     const classes = useStyles();
     const { enqueueSnackbar } = useSnackbar();
-    const [value, setValue] = React.useState('tome');
+    const [value, setValue] = useState('tome');
 
 
     let tome_name_tf = useRef(null);
@@ -38,13 +38,56 @@ const DialogToAdd = ({ handleClose, open }) => {
     let meto_email_tf = useRef(null);
     let meto_date_tf = useRef(null);
 
+    const nameRegex = /^[а-яА-Яa-zA-Z]+$/
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const sumRegex = /^[0-9]+$/
+    const dateRegex = /^[1-2][0-9][0-9][0-9]\-[0-1][0-9]\-[0-3][0-9]$/
+    
+
+    const [noteNameError, setNoteNameError] = useState(false)
+    const [noteEmailError, setNoteEmailError] = useState(false)
+    const [noteSumError, setNoteSumError] = useState(false)
+    const [noteDateError, setNoteDateError] = useState(false)
+
+
     var listOfNotes = getData('notes')
 
-    
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    function updateErrors() {
+        setNoteNameError(false)
+        setNoteEmailError(false)
+        setNoteSumError(false)
+        setNoteDateError(false)
+    }
+
+    function checkValues(name, sum, email, date) {
+        let isCorrect = true
+        if (!nameRegex.test(name)) {
+            setNoteNameError(true)
+            isCorrect = false
+        } else setNoteNameError(false)
+
+        if (!sumRegex.test(sum)) {
+            setNoteSumError(true)
+            isCorrect = false
+        } else setNoteSumError(false)
+
+        if (!emailRegex.test(email) && email !== '') {
+            setNoteEmailError(true)
+            isCorrect = false
+        } else setNoteEmailError(false)
+
+        if (!dateRegex.test(date)) {
+            setNoteDateError(true)
+            isCorrect = false
+        } else setNoteDateError(false)
+
+        return isCorrect
+    }
 
     const tryAdd = () => {
         switch (value) {
@@ -54,24 +97,28 @@ const DialogToAdd = ({ handleClose, open }) => {
                 let email = tome_email_tf.current.value;
                 let date = tome_date_tf.current.value;
 
-                listOfNotes.unshift({ID: 'tome', NAME: name, SUM: sum, EMAIL: email, DATE: date})
+                if (!checkValues(name, sum, email, date))
+                    return
+
+                listOfNotes.unshift({ ID: 'tome', NAME: name, SUM: sum, EMAIL: email, DATE: date })
                 storeData('notes', listOfNotes)
                 handleClose()
                 break;
             }
-            case 'meto':{
+            case 'meto': {
                 let name = meto_name_tf.current.value;
                 let sum = meto_sum_tf.current.value;
                 let email = meto_email_tf.current.value;
                 let date = meto_date_tf.current.value;
 
-                listOfNotes.push({ID: 'meto', NAME: name, SUM: sum, EMAIL: email, DATE: date})
+                listOfNotes.push({ ID: 'meto', NAME: name, SUM: sum, EMAIL: email, DATE: date })
                 storeData('notes', listOfNotes)
                 handleClose()
                 break;
             }
         }
-        enqueueSnackbar('Запись успешно создана', {variant: 'success'})
+        updateErrors()
+        enqueueSnackbar('Запись успешно создана', { variant: 'success' })
     }
 
     return (
@@ -96,6 +143,7 @@ const DialogToAdd = ({ handleClose, open }) => {
                     </AppBar>
                     <TabPanel value="tome">
                         <TextField
+                            error={noteNameError}
                             autoFocus
                             required
                             margin="dense"
@@ -106,6 +154,7 @@ const DialogToAdd = ({ handleClose, open }) => {
                             inputRef={tome_name_tf}
                         />
                         <TextField
+                            error={noteSumError}
                             required
                             margin="dense"
                             id="sum"
@@ -115,6 +164,7 @@ const DialogToAdd = ({ handleClose, open }) => {
                             inputRef={tome_sum_tf}
                         />
                         <TextField
+                            error={noteEmailError}
                             margin="dense"
                             id="email"
                             label="Введите email"
@@ -123,6 +173,8 @@ const DialogToAdd = ({ handleClose, open }) => {
                             inputRef={tome_email_tf}
                         />
                         <TextField
+                            error={noteDateError}
+                            required
                             InputLabelProps={{ shrink: true }}
                             margin="dense"
                             id="date"
@@ -134,6 +186,8 @@ const DialogToAdd = ({ handleClose, open }) => {
                     </TabPanel>
                     <TabPanel value="meto">
                         <TextField
+                            required
+                            error={noteNameError}
                             autoFocus
                             margin="dense"
                             id="name"
@@ -143,6 +197,8 @@ const DialogToAdd = ({ handleClose, open }) => {
                             inputRef={meto_name_tf}
                         />
                         <TextField
+                            required
+                            error={noteSumError}
                             margin="dense"
                             id="sum"
                             label="Введите сумму"
@@ -151,6 +207,7 @@ const DialogToAdd = ({ handleClose, open }) => {
                             inputRef={meto_sum_tf}
                         />
                         <TextField
+                            error={noteEmailError}
                             margin="dense"
                             id="email"
                             label="Введите email"
@@ -159,6 +216,8 @@ const DialogToAdd = ({ handleClose, open }) => {
                             inputRef={meto_email_tf}
                         />
                         <TextField
+                            error={noteDateError}
+                            required
                             InputLabelProps={{ shrink: true }}
                             margin="dense"
                             id="date"
