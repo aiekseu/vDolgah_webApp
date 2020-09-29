@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "745575cfd5531bb1db39726d5e231102",
+    "revision": "c3839a22b17096084f75bfb0732bb912",
     "url": "/vDolgah_webApp/index.html"
   },
   {
-    "revision": "c0c4c4b4c512f880e7a9",
+    "revision": "64877acb6cc72cac0f67",
     "url": "/vDolgah_webApp/static/css/main.5ecd60fb.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/vDolgah_webApp/static/js/2.64ce897d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c0c4c4b4c512f880e7a9",
-    "url": "/vDolgah_webApp/static/js/main.8ee35451.chunk.js"
+    "revision": "64877acb6cc72cac0f67",
+    "url": "/vDolgah_webApp/static/js/main.45f15c14.chunk.js"
   },
   {
     "revision": "cc0b5835fb80a152c9e1",

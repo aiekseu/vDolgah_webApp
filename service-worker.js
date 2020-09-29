@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/vDolgah_webApp/precache-manifest.74af456cdd9c228200c0072fc970e38d.js"
+  "/vDolgah_webApp/precache-manifest.6c2234a3f675bcc50ca4fde0ccc75bef.js"
 );
 
 self.addEventListener('message', (event) => {
