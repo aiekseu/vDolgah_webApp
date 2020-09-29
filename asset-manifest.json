@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/vDolgah_webApp/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/vDolgah_webApp/static/js/main.8c0ae3c7.chunk.js",
-    "main.js.map": "/vDolgah_webApp/static/js/main.8c0ae3c7.chunk.js.map",
+    "main.js": "/vDolgah_webApp/static/js/main.eea0fc65.chunk.js",
+    "main.js.map": "/vDolgah_webApp/static/js/main.eea0fc65.chunk.js.map",
     "runtime-main.js": "/vDolgah_webApp/static/js/runtime-main.82290985.js",
     "runtime-main.js.map": "/vDolgah_webApp/static/js/runtime-main.82290985.js.map",
     "static/js/2.64ce897d.chunk.js": "/vDolgah_webApp/static/js/2.64ce897d.chunk.js",
     "static/js/2.64ce897d.chunk.js.map": "/vDolgah_webApp/static/js/2.64ce897d.chunk.js.map",
     "index.html": "/vDolgah_webApp/index.html",
-    "precache-manifest.99be2825b08704346d0e35b0a7008481.js": "/vDolgah_webApp/precache-manifest.99be2825b08704346d0e35b0a7008481.js",
+    "precache-manifest.65442cf4cff5110635acb9900e6cc2ae.js": "/vDolgah_webApp/precache-manifest.65442cf4cff5110635acb9900e6cc2ae.js",
     "service-worker.js": "/vDolgah_webApp/service-worker.js",
     "static/css/main.5ecd60fb.chunk.css.map": "/vDolgah_webApp/static/css/main.5ecd60fb.chunk.css.map",
     "static/js/2.64ce897d.chunk.js.LICENSE.txt": "/vDolgah_webApp/static/js/2.64ce897d.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.82290985.js",
     "static/js/2.64ce897d.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.8c0ae3c7.chunk.js"
+    "static/js/main.eea0fc65.chunk.js"
   ]
 }
