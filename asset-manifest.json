@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/pi4alb/vDolgah_webApp/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/pi4alb/vDolgah_webApp/static/js/main.306f75c0.chunk.js",
-    "main.js.map": "/pi4alb/vDolgah_webApp/static/js/main.306f75c0.chunk.js.map",
-    "runtime-main.js": "/pi4alb/vDolgah_webApp/static/js/runtime-main.1c6f390c.js",
-    "runtime-main.js.map": "/pi4alb/vDolgah_webApp/static/js/runtime-main.1c6f390c.js.map",
-    "static/js/2.64ce897d.chunk.js": "/pi4alb/vDolgah_webApp/static/js/2.64ce897d.chunk.js",
-    "static/js/2.64ce897d.chunk.js.map": "/pi4alb/vDolgah_webApp/static/js/2.64ce897d.chunk.js.map",
-    "index.html": "/pi4alb/vDolgah_webApp/index.html",
-    "precache-manifest.3ff4380829517b51193bde6122c3a0e2.js": "/pi4alb/vDolgah_webApp/precache-manifest.3ff4380829517b51193bde6122c3a0e2.js",
-    "service-worker.js": "/pi4alb/vDolgah_webApp/service-worker.js",
-    "static/css/main.5ecd60fb.chunk.css.map": "/pi4alb/vDolgah_webApp/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.64ce897d.chunk.js.LICENSE.txt": "/pi4alb/vDolgah_webApp/static/js/2.64ce897d.chunk.js.LICENSE.txt"
+    "main.css": "/vDolgah_webApp/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/vDolgah_webApp/static/js/main.8ee35451.chunk.js",
+    "main.js.map": "/vDolgah_webApp/static/js/main.8ee35451.chunk.js.map",
+    "runtime-main.js": "/vDolgah_webApp/static/js/runtime-main.82290985.js",
+    "runtime-main.js.map": "/vDolgah_webApp/static/js/runtime-main.82290985.js.map",
+    "static/js/2.64ce897d.chunk.js": "/vDolgah_webApp/static/js/2.64ce897d.chunk.js",
+    "static/js/2.64ce897d.chunk.js.map": "/vDolgah_webApp/static/js/2.64ce897d.chunk.js.map",
+    "index.html": "/vDolgah_webApp/index.html",
+    "precache-manifest.74af456cdd9c228200c0072fc970e38d.js": "/vDolgah_webApp/precache-manifest.74af456cdd9c228200c0072fc970e38d.js",
+    "service-worker.js": "/vDolgah_webApp/service-worker.js",
+    "static/css/main.5ecd60fb.chunk.css.map": "/vDolgah_webApp/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.64ce897d.chunk.js.LICENSE.txt": "/vDolgah_webApp/static/js/2.64ce897d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.1c6f390c.js",
+    "static/js/runtime-main.82290985.js",
     "static/js/2.64ce897d.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.306f75c0.chunk.js"
+    "static/js/main.8ee35451.chunk.js"
   ]
 }
