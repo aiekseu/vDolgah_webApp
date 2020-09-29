@@ -55,10 +55,12 @@ const Header = (props) => {
     const currentUser = getData('loggedUser')
     const allUsers = getData('users')
     var userName = ""
-    for (let i = 0; i< allUsers.length; i++) {
-        if (allUsers[i].EMAIL === currentUser)
-            userName = allUsers[i].NAME
-    }
+    
+    if (allUsers)
+        for (let i = 0; i< allUsers.length; i++) {
+            if (allUsers[i].EMAIL === currentUser)
+                userName = allUsers[i].NAME
+        }
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -71,6 +73,7 @@ const Header = (props) => {
     const tryLogout = () => {
         storeData('loggedUser', null)
         setUserLoggedIn(false)
+        history.push('/login')
     }
 
     const goToProfile = () => {
@@ -124,9 +127,6 @@ const Header = (props) => {
                     isMain
                     ? <MenuItem onClick={goToProfile}>Профиль</MenuItem>
                     : <MenuItem onClick={goToMain}>Мои долги</MenuItem>
-                }
-                {
-                    !isMain && <MenuItem onClick={goToMain}>Редактировать</MenuItem>
                 }
                 <MenuItem onClick={tryLogout}>Выйти</MenuItem>
             </Menu>

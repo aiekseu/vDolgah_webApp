@@ -38,7 +38,7 @@ const DialogToAdd = ({ handleClose, open }) => {
     let meto_email_tf = useRef(null);
     let meto_date_tf = useRef(null);
 
-    const nameRegex = /^[а-яА-Яa-zA-Z]+$/
+    const nameRegex = /^[а-яА-Яa-zA-Z]+[а-яА-Яa-zA-Z]+$/
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     const sumRegex = /^[0-9]+$/
     const dateRegex = /^[1-2][0-9][0-9][0-9]\-[0-1][0-9]\-[0-3][0-9]$/

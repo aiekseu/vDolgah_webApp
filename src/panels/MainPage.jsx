@@ -5,7 +5,7 @@ import {
     } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
-import { getData } from '../data/localStorage';
+import { getData, storeData } from '../data/localStorage';
 
 import AddIcon from '@material-ui/icons/Add';
 
@@ -40,8 +40,11 @@ const MainPage = ({ userLoggedIn, setUserLoggedIn }) => {
     const [update, setUpdate] = React.useState(false);
 
     var listOfNotes = getData('notes')
-    if (listOfNotes == null) 
+    if (listOfNotes == null) {
         listOfNotes = []
+        storeData('notes', [])
+    } 
+        
 
 
     // УБРАТЬ!!

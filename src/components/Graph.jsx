@@ -22,15 +22,19 @@ const Graph = () => {
     allNotes.forEach(element => {
         switch (element.ID) {
             case 'tome': {
-                curentToMeSum += parseInt(element.SUM, 10)
-                if (data[data.length-1].name === element.DATE) {
-                    data.pop()
+                curentToMeSum += parseInt(element.SUM, 10)                
+                if (!data) {
+                    console.log(data)
+                    if (data[data.length-1].name === element.DATE) {
+                        data.pop()
+                    }
                 }
+                    
                 data.push({name: element.DATE, tome: curentToMeSum, meto: currentMeToSum })
                 break;
             }
             case 'meto': {
-                currentMeToSum += parseInt(element.SUM, 10)
+                currentMeToSum = parseInt(element.SUM, 10)
                 data.push({name: element.DATE, tome: curentToMeSum, meto: currentMeToSum})
                 break;
             }
